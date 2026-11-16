@@ -1,0 +1,5 @@
+BOOTMAGIC_ENABLE = no
+EXTRAKEY_ENABLE  = yes
+NKRO_ENABLE      = yes
+MOUSEKEY_ENABLE  = no
+VIA_ENABLE       = yes
