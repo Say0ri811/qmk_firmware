@@ -1,0 +1,27 @@
+name: build-faruzan
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: qmkfm/qmk_cli
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: point qmk at this repo
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          echo "QMK_HOME=$GITHUB_WORKSPACE" >> "$GITHUB_ENV"
+
+      - name: compile
+        run: qmk compile -kb faruzan -km default
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: faruzan-firmware
+          path: '*.bin'
